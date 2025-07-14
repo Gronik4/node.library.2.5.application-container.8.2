@@ -2,6 +2,14 @@ const express = require('express');
 const router = express.Router();
 const {nanoid} = require('nanoid');
 
+const redis = require("redis");
+const REDIS_URL = process.env.REDIS_URL || 'redis://localhost';
+const client = redis.createClient({url: REDIS_URL});
+
+(async()=> {
+  await client.connect();
+});
+
 const stor = require('../Utils/stor');
 const Book = require('../Utils/Book');
 const {fields, names} = require('../Utils/fields');
@@ -34,18 +42,25 @@ router.post('/create', (req, res)=> {
   })
 });
 
-router.get('/:id', (req, res)=> {
+router.get('/:id', async(req, res)=> {
   const{id} = req.params;
   const idx = stor.books.findIndex(el=> el.id === id);
   if(idx === -1) {
     res.redirect('/404?flag= error without get(/:id)');
   } else {
-    res.render('books/view', {
+    try{
+      //const cnt = await client.incr(id);
+      res.render('books/view', {
       title: 'Все про книгу',
       book: stor.books[idx],
       fields: fields,
-      names: names
-    })
+      names: names,
+      //count: cnt
+      })
+    } catch(e) {
+      res.json({errcode: 500, errnsg: `redis error - ${e}!!`})
+    }
+    
   }
 });
 
