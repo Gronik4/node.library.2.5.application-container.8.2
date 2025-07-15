@@ -1,0 +1,14 @@
+services:
+  storage:
+    image: redis
+    volumes:
+      - ./data:/data
+  counter:
+    image: gronik4/node0hw0docker:hw8task2
+    environment:
+      - PORT=3002
+      - REDIS_URL=redis://storage
+    ports:
+      - 80:3002
+    depends_on:
+      - storage
