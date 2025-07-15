@@ -4,11 +4,12 @@ const {nanoid} = require('nanoid');
 
 const redis = require("redis");
 const REDIS_URL = process.env.REDIS_URL || 'redis://localhost';
-const client = redis.createClient({url: REDIS_URL});
+
+const client = redis.createClient({url: REDIS_URL, legacyMode: true});
 
 (async()=> {
   await client.connect();
-});
+})();
 
 const stor = require('../Utils/stor');
 const Book = require('../Utils/Book');
@@ -49,13 +50,13 @@ router.get('/:id', async(req, res)=> {
     res.redirect('/404?flag= error without get(/:id)');
   } else {
     try{
-      //const cnt = await client.incr(id);
+      const cnt = await client.incr(id);
       res.render('books/view', {
       title: 'Все про книгу',
       book: stor.books[idx],
       fields: fields,
       names: names,
-      //count: cnt
+      count: cnt
       })
     } catch(e) {
       res.json({errcode: 500, errnsg: `redis error - ${e}!!`})

@@ -9,6 +9,7 @@
           <div class="card-body">
             
             <p class="card-text">id: <%= book.id %></p>
+            <p class="card-text">Количество просмотров: <%= count %></p>
               <% fields.map ((el, idx)=> { %>
                 <p class="card-text"><%= names[idx]%>: <%= book[el]%></p>
               <% }) %>
