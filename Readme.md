@@ -2,7 +2,7 @@
 ## Блок: Docker   
 ### Тема: Контейнеризация приложения
 Домашнее задание №8  
-Задачи №1 и №2  
+Задача №2  
 Автор: Гречишников О.Н. группа: NDJS-ASINHR    
 
 В Dockerfile, COPY ./src src/ исправил на COPY ./src /app/src/ - все заработало!!!    
@@ -13,4 +13,4 @@
 
 Образ к задаче №1  gronik4/node0hw0docker:hw8task1  
 
-Образ к задаче №1  gronik4/node0hw0docker:hw8task2
+Образ к задаче №2  gronik4/node0hw0docker:hw8task2
