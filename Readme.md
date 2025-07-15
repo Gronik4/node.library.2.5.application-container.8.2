@@ -3,9 +3,7 @@
 ### Тема: Контейнеризация приложения
 Домашнее задание №8  
 Задача №2  
-Автор: Гречишников О.Н. группа: NDJS-ASINHR    
-
-В Dockerfile, COPY ./src src/ исправил на COPY ./src /app/src/ - все заработало!!!    
+Автор: Гречишников О.Н. группа: NDJS-ASINHR  
 
 Расположение GitHub репозиториев:  
 По задаче №1 [https://github.com/Gronik4/node.library.2.5.application-container.8.1](https://github.com/Gronik4/node.library.2.5.application-container.8.1)    
